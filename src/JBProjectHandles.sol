@@ -9,7 +9,7 @@ import {JBPermissioned} from "@juicebox/src/abstract/JBPermissioned.sol";
 import {IJBProjects} from "@juicebox/src/interfaces/IJBProjects.sol";
 import {IJBPermissions} from "@juicebox/src/interfaces/IJBPermissions.sol";
 import {IJBProjectHandles} from "./interfaces/IJBProjectHandles.sol";
-import {JBOperations2} from "./libraries/JBOperations2.sol";
+import {JBHandlePermissionIds} from "./libraries/JBHandlePermissionIds.sol";
 
 /// @notice Manages reverse records that point from JB project IDs to ENS nodes. If the reverse record of a project ID
 /// is pointed to an ENS node with a TXT record matching the ID of that project, then the ENS node will be considered
@@ -115,7 +115,7 @@ contract JBProjectHandles is IJBProjectHandles, JBPermissioned {
         _requirePermission({
             account: PROJECTS.ownerOf(projectId),
             projectId: projectId,
-            permissionId: JBOperations2.SET_ENS_NAME_FOR
+            permissionId: JBHandlePermissionIds.SET_ENS_NAME_FOR
         });
 
         // Get a reference to the number of parts are in the ENS name.

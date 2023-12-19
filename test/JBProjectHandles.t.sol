@@ -10,7 +10,7 @@ import {JBProjects} from "@juicebox/src/JBProjects.sol";
 import {JBPermissions} from "@juicebox/src/JBPermissions.sol";
 import {JBPermissionsData} from "@juicebox/src/structs/JBPermissionsData.sol";
 import "@contracts/JBProjectHandles.sol";
-import "@contracts/libraries/JBOperations2.sol";
+import "@contracts/libraries/JBHandlePermissionIds.sol";
 
 ENS constant ensRegistry = ENS(0x00000000000C2E074eC69A0dFb2997BA6C7d2e1e);
 IJBProjectHandles constant oldHandle = IJBProjectHandles(0x41126eC99F8A989fEB503ac7bB4c5e5D40E06FA4);
@@ -67,7 +67,7 @@ contract ContractTest is Test {
 
         // Give the authorisation to set ENS to caller
         uint256[] memory permissionIndexes = new uint256[](1);
-        permissionIndexes[0] = JBOperations2.SET_ENS_NAME_FOR;
+        permissionIndexes[0] = JBHandlePermissionIds.SET_ENS_NAME_FOR;
 
         vm.prank(projectOwner);
         jbPermissions.setPermissionsForOperator(
@@ -125,7 +125,7 @@ contract ContractTest is Test {
     )
         public
     {
-        vm.assume(authorizationIndex != JBOperations2.SET_ENS_NAME_FOR && authorizationIndex < 255);
+        vm.assume(authorizationIndex != JBHandlePermissionIds.SET_ENS_NAME_FOR && authorizationIndex < 255);
         vm.assume(caller != projectOwner);
         uint256 projectId = jbProjects.createFor(projectOwner);
 
